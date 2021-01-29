@@ -1,0 +1,23 @@
+{
+  "name": "enter_voicedump",
+  "version": "1.0.0",
+  "description": "Dumps voice lines (with corresponding files) from Entergram's main.snr script format",
+  "main": "dump.js",
+  "dependencies": {
+    "iconv-lite": "^0.6.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ooa113y/enter-voicedump.git"
+  },
+  "author": "ooa113y",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ooa113y/enter-voicedump/issues"
+  },
+  "homepage": "https://github.com/ooa113y/enter-voicedump#readme"
+}
