@@ -28,7 +28,7 @@ while (i < snr.length) {
       o.push(snr[i])
       i++
     }
-    if (o) {
+    if (o.length) {
       output += replaceHalfWidth(iconv.decode(Buffer.from(o), 'Shift_JIS')) // Convert from Entergram's encoding to UTF-8
         .split('@v') // Split into separate voice lines
         .map(x => x.replace('.', '|')) // Replace the voice/text separator with something more usable
