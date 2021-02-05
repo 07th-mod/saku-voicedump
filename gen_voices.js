@@ -1,17 +1,17 @@
 const fs = require('fs')
-const borders = [91467, 92223] // Performance: set to first and last line number in voice_order.txt that's relevant to the current arc
+const borders = [92124, 94474] // Performance: set to first and last line number in voice_order.txt that's relevant to the current arc
 const voiceLines = fs.readFileSync('voice_order.txt', 'utf-8').split('\n').filter(x => x.trim()).map(x => {
   const s = x.split('|')
   return { file: s[0].trim(), line: s[1].trim() }
 }).slice(borders[0] - 10, borders[1] + 10)
 const processedLines = []
 let script = fs.readFileSync('0.utf.bak', 'utf-8') // Read from a backup of the original 0.utf file
-script = script.replace(/。/g, '') // A lot of Entergram lines don't include periods... just get rid of them...
+script = script.replace(/。/ug, '') // A lot of Entergram lines don't include periods... just get rid of them...
 for (const v of voiceLines) {
-  const vline = v.line.replace(/。/g, '')
+  const vline = v.line.replace(/。/ug, '')
   if (script.includes(vline)) {
     script = script.replace(vline, `:dwave 0, "voice\\${v.file.replace('/', '\\')}.ogg":${vline}`)
-      .replace(/　:dwave/g, ':dwave') // eslint-disable-line
+      .replace(/　:dwave/ug, ':dwave') // eslint-disable-line
     processedLines.push(v.file)
   }
 }
@@ -44,4 +44,4 @@ for (const char of Object.keys(charValues)) {
 }
 fs.writeFileSync('needvoices.sh', out, 'utf-8')
 // Uncomment this to generate the actual script:
-// fs.writeFileSync('0.utf', script, 'utf-8')
+fs.writeFileSync('0.utf', script, 'utf-8')
