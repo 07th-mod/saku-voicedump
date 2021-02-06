@@ -6,12 +6,14 @@ const voiceLines = fs.readFileSync('voice_order.txt', 'utf-8').split('\n').filte
 }).slice(borders[0] - 10, borders[1] + 10)
 const processedLines = []
 let script = fs.readFileSync('0.utf.bak', 'utf-8') // Read from a backup of the original 0.utf file
-script = script.replace(/。/ug, '') // A lot of Entergram lines don't include periods... just get rid of them...
+// Entergram scripts don't include periods (most of the time) and weird full-width spaces (always), so get rid of them
+script = script.replace(/。/ug, '')
+script = script.replace(/　/ug, '') // eslint-disable-line no-irregular-whitespace
 for (const v of voiceLines) {
   const vline = v.line.replace(/。/ug, '')
   if (script.includes(vline)) {
     script = script.replace(vline, `:dwave 0, "voice\\${v.file.replace('/', '\\')}.ogg":${vline}`)
-      .replace(/　:dwave/ug, ':dwave') // eslint-disable-line
+      .replace(/　:dwave/ug, ':dwave') // eslint-disable-line no-irregular-whitespace
     processedLines.push(v.file)
   }
 }
