@@ -9,23 +9,20 @@ let dumpCount = 0
 let done = false
 let output = header.join('\n')
 for (let line of script) {
-  let newLine = line
   if (!done) {
     if (line.includes(';')) continue // Blindly skip lines that might contain comments -- text lines never do
     const matches = [...line.matchAll(jpre)]
-    // console.log(matches)
     if (matches) {
       for (const match of matches) {
         if (dumpCount === dump.length) { // Don't try to "translate" more than possible
           done = true
           break
         }
-        newLine = newLine.replace(match, dump[dumpCount])
+        line = line.replace(match, dump[dumpCount])
         dumpCount++
       }
     }
   }
-  if (line !== newLine) line = `\n;${line}\n${newLine}\n` // Keep old line as comment
   output += `${line}\n`
 }
 fs.writeFileSync('0.utf', output, 'utf-8')
