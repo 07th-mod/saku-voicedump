@@ -13,7 +13,6 @@ for (const v of voiceLines) {
   const vline = v.line.replace(/。/ug, '')
   if (script.includes(vline)) {
     script = script.replace(vline, `:dwave 0, "voice\\${v.file.replace('/', '\\')}.ogg":${vline}`)
-      .replace(/　:dwave/ug, ':dwave') // eslint-disable-line no-irregular-whitespace
     processedLines.push(v.file)
   }
 }
